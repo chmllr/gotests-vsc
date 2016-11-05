@@ -30,7 +30,12 @@ function generateCommand(params) {
         let fileName = vscode.window.activeTextEditor.document.fileName;
         let cmd = 'gotests';
         let args = params.concat(['-w', fileName]);
-        let result = cp.execFileSync(cmd, args);
-        vscode.window.showInformationMessage(cmd + ' ' + args.join(" ") + ': ' + result);
+        let result = cp.execFile(cmd, args, {}, (err, stdout, stderr) => {
+            if (err && err.code == "ENOENT") {
+                vscode.window.showErrorMessage('`gotest` command not found!');
+                return;
+            }
+            vscode.window.showInformationMessage(cmd + ' ' + args.join(" ") + ': ' + result);
+        });
     }
 }

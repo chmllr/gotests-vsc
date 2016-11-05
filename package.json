@@ -11,13 +11,17 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.goTestsAll"
+        "onCommand:extension.goTestsAll",
+        "onCommand:extension.goTestsExported"
     ],
     "main": "./extension",
     "contributes": {
         "commands": [{
             "command": "extension.goTestsAll",
-            "title": "go-tests: generate tests for all functions and methods"
+            "title": "Go Tests: generate tests for all functions and methods"
+        }, {
+            "command": "extension.goTestsExported",
+            "title": "Go Tests: generate tests for exported functions and methods"
         }]
     },
     "scripts": {
